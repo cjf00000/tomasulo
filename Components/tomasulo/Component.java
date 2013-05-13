@@ -51,12 +51,12 @@ public abstract class Component {
 	}
 	
 	public Data countinueExecute()
-	{
+	{	
 		if (!resource.occupied || resource.owner!=this)
 		{
 			return null;
 		}
-		
+			
 		resource.execute();
 		
 		if (!resource.occupied)
