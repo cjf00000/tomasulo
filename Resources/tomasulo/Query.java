@@ -5,4 +5,5 @@ public abstract class Query {
 	
 	protected Query() {}
 	
+	public Component source;
 }

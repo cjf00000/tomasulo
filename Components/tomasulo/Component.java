@@ -52,7 +52,7 @@ public abstract class Component {
 	
 	public Data countinueExecute()
 	{
-		if (!resource.occupied)
+		if (!resource.occupied || resource.owner!=this)
 		{
 			return null;
 		}
@@ -85,7 +85,9 @@ public abstract class Component {
 	private void tryExecute(Reservation reservation) {
 		if (reservation.isReady())
 		{
-			this.resource.tryQuery(this.createQuery(reservation));
+			Query query = this.createQuery(reservation);
+			query.source = this;
+			this.resource.tryQuery(query);
 			this.runningReservation = reservation;
 		}		
 	}

@@ -19,6 +19,7 @@ public class CPU {
 		// Component
 		this.components = new ArrayList<Component>();
 		this.components.add(new LoadComponent(3, this.regFile, memory));
+		this.components.add(new StoreComponent(3, this.regFile, memory));
 		
 		// OpQueue
 		this.opQueue = new OpQuene(components);
@@ -98,15 +99,45 @@ public class CPU {
 		this.memory.data[index] = value;
 	}
 	
+	public Data getReg(int index)
+	{
+		return this.regFile.data[index];
+	}
+	
+	public void setReg(int index, Data data)
+	{
+		this.regFile.data[index] = data;
+	}
+	
+	public void setReg(int index, double value)
+	{
+		this.regFile.data[index].value = value;
+	}
+	
 	public static void main(String args[])
 	{
 		CPU cpu = new CPU();
+		
+		// Test Load
+		cpu.setMemory(0, 1992.23);
 		
 		cpu.addInstruction(Instruction.mem(Instruction.Type.LD, 0, 0));		
 		cpu.onTick();
 		cpu.onTick();
 		cpu.onTick();
 		cpu.onTick();
+		
+		Logger.Debug("Load result = " + cpu.getReg(0));
+		
+		// Test Store
+		cpu.addInstruction(Instruction.mem(Instruction.Type.ST, 0, 1));
+		cpu.onTick();
+		cpu.onTick();
+		cpu.onTick();
+		cpu.onTick();
+		
+		Logger.Debug("Store result = " + cpu.getMemory(1));
+		
 	}
 	
 	private OpQuene opQueue;

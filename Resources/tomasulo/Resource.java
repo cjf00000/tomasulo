@@ -6,6 +6,7 @@ public abstract class Resource {
 	{
 		this.occupied = false;
 		this.processCycles = processCycles;
+		this.owner = null;
 	}
 	
 	public boolean isOccupied()
@@ -20,6 +21,7 @@ public abstract class Resource {
 		
 		Logger.Info("Begin to process query " + query);
 		
+		this.owner = query.source;
 		this.result = this.computeResult(query);
 		this.occupied = true;
 		this.countDown = this.processCycles + 1;		
@@ -54,4 +56,5 @@ public abstract class Resource {
 	protected int processCycles;
 	protected int countDown;
 	protected double result;
+	public Component owner;
 }

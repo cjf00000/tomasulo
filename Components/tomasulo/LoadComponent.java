@@ -19,8 +19,7 @@ public class LoadComponent extends Component {
 		reservation.srcData1 = Data.normal(0);
 		reservation.srcData2 = Data.normal(0);
 		
-		this.regFile.data[reservation.instruction.dest] = reservation.destData;
-		
+		this.regFile.data[reservation.instruction.dest] = reservation.destData;		
 	}
 
 	@Override
